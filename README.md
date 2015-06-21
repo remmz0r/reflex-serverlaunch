@@ -1,4 +1,4 @@
-# reflex-serverlaunch pre-alpha release #1
+# reflex-serverlaunch pre-alpha release no. 1
 Node.js server for launching Reflex servers on demand
 
 # requirements / dependencies
