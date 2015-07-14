@@ -37,50 +37,15 @@ var app = express();
 
 
 
-var server = 'E:\\Steam\\steamapps\\common\\Reflex\\reflexded.exe';
+var server = config.server.path;
  
 app.get('/launch/:mode/:port/:map', function(req, res) {
-	res.send({mode: "tdm", host: "game.reflexfps.net.au", port: "25790", password: "undefined"})
-	var mode = req.params.mode;
-	var port = req.params.port;
-	var steam = parseInt(port) + 10;
-	var map = req.params.map;
-	var d = new Date();
-	var v  = new Date();
-	var h = addZero(d.getHours());
-	var m = addZero(d.getMinutes());
-	
-	var taskName = mode + "#" + currentServers;
-	
-	var serverString =  server + '\" +loadconfig base' + ' +sv_startmode' + mode + '+sv_gameport ' + port + ' +sv_steamport ' + steam + ' +sv_startmap ' + map;
-	
-	var startTime = h + ":" + addZero(parseInt(m) + 2);
-	
-	console.log(mode);
-
-	
-	console.log(startTime);
-	
-    var spawn = require('child_process').spawn,
-	ls           = spawn('schtasks', ['/Create', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/DU', '01:45', '/TR', serverString]);
-
-	ls.stdout.on('data', function (data) {
-	console.log('stdout: ' + data);
-	});
-
-	ls.stderr.on('data', function (data) {
-	console.log('stderr: ' + data);
-	});
-
-	ls.on('exit', function (code) {
-	console.log('child process exited with code ' + code);
-	});
 	
 });
 
 app.get('/launch/pug/:mode', function(req, res) {
 	
-	if (currentServers == maxServers) {
+	if (currentServers >= maxServers) {
 		
 	res.send({error: "Too many servers launched, try again later"})
 	
@@ -128,7 +93,11 @@ app.get('/launch/pug/:mode', function(req, res) {
 	console.log(startTime);
 	
     var spawn = require('child_process').spawn,
+<<<<<<< HEAD
+	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', 'flipped\\reflex', '/RP', 'mattz0r!', '/DU', dur]);
+=======
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', 'reflex', '/RP', 'reflex', '/DU', dur]);
+>>>>>>> dff3f6affa6e6cf161ed95e67a14af1be4f38e49
 	
 	res.send({mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
 	
@@ -172,5 +141,5 @@ app.get('/launch/pug/:mode', function(req, res) {
 	}
 	
 });
-app.listen(3000);
+app.listen(3000, "172.18.87.15");
 console.log('Listening on port 3000...');

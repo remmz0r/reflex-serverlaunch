@@ -1,10 +1,10 @@
 { 
 	"server": 
 		{ 
-			"path": "E:\\Steam\\steamapps\\common\\Reflex\\reflexded.exe",
+			"path": "C:\\steamcmd\\reflex_ds\\reflexded.exe",
 			"config": "base",
-			"maxServers": 10,
-			"minPort": 25700,
+			"maxServers": 3,
+			"minPort": 32100,
 			"hostname": "game.reflexfps.net.au"
 		},
 		
@@ -12,7 +12,7 @@
 		{ 
 			"tdm": 
 			{
-				"duration": {"hours": 0,  "minutes": 11},
+				"duration": {"hours": 1,  "minutes": 11},
 				"maxClients": 8,
 				"timeLimit": 20
 			}
