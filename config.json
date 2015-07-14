@@ -23,19 +23,19 @@
 				},
 				
 			"2v2":
-				{	"duration": {"hours": 2, "minutes", 00},
+				{	"duration": {"hours": 2, "minutes": 00},
 					"maxClients": 6,
 					"timeLimit": 15
 				}
 				
 			"atdm":
-				{	"duration": {"hours": 2, "minutes", 00};
+				{	"duration": {"hours": 2, "minutes": 00};
 					"maxClients": 10,
 					"timeLimit" 20
 				}
 				
 			"affa":
-				{	"duration": {"hours": 1, "minutes", 00};
+				{	"duration": {"hours": 1, "minutes": 00};
 					"maxClients": 10,
 					"timeLimit": 20
 				}
