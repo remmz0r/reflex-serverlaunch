@@ -43,17 +43,25 @@ app.get('/launch/:mode/:port/:map', function(req, res) {
 	
 });
 
+app.get('/info/free', function(req, res) {
+	
+	res.send({freeServers: config.server.maxServers - currentServers})
+	
+});
+
 app.get('/launch/pug/:mode', function(req, res) {
 	
 	if (currentServers >= maxServers) {
 		
-	res.send({error: "Too many servers launched, try again later"})
+	res.send({success: 0, error: "Too many servers running"})
 	
 	} else {
+		
+	mode = req.params.mode;
 	
 	switch(req.params.mode) {
 		
-		case "tdm":
+		case "duel": mode = "1v1"; break;
 		case "2v2": mode = "tdm"; break;
 		
 	}
@@ -70,17 +78,41 @@ app.get('/launch/pug/:mode', function(req, res) {
 	
 	switch(mode) {
 		
-		case "1v1": maxClients = 2; break;
-		case "2v2": maxClients = 4; break;
+		case "1v1":
+			var hours = config.gametype.duel.duration.hours;
+			var mins = config.gametype.duel.duration.minutes;
+			var maxClients = config.gametype.duel.maxClients;
+			var timeLimit = config.gametype.duel.timeLimit; break;
+		case "2v2":
+			var hours = config.gametype.twos.duration.hours;
+			var mins = config.gametype.twos.duration.minutes;
+			var maxClients = config.gametype.twos.maxClients;
+			var timeLimit = config.gametype.twos.timeLimit; break;
 		case "tdm":
-			
-		
 			var hours = config.gametype.tdm.duration.hours;
 			var mins = config.gametype.tdm.duration.minutes;
 			var maxClients = config.gametype.tdm.maxClients;
-			var timeLimit = config.gametype.tdm.timeLimit;
-		
-			break;
+			var timeLimit = config.gametype.tdm.timeLimit; break;
+		case "atdm":
+			var hours = config.gametype.atdm.duration.hours;
+			var mins = config.gametype.atdm.duration.minutes;
+			var maxClients = config.gametype.atdm.maxClients;
+			var timeLimit = config.gametype.atdm.timeLimit; break;	
+		case "affa":
+			var hours = config.gametype.affa.duration.hours;
+			var mins = config.gametype.affa.duration.minutes;
+			var maxClients = config.gametype.affa.maxClients;
+			var timeLimit = config.gametype.affa.timeLimit; break;	
+		case "ffa":
+			var hours = config.gametype.ffa.duration.hours;
+			var mins = config.gametype.ffa.duration.minutes;
+			var maxClients = config.gametype.ffa.maxClients;
+			var timeLimit = config.gametype.ffa.timeLimit; break;	
+		case "a1v1":
+			var hours = config.gametype.a1v1.duration.hours;
+			var mins = config.gametype.a1v1.duration.minutes;
+			var maxClients = config.gametype.a1v1.maxClients;
+			var timeLimit = config.gametype.a1v1.timeLimit; break;				
 		case "ctf":	break;
 		
 	}
@@ -100,9 +132,8 @@ app.get('/launch/pug/:mode', function(req, res) {
 	
     var spawn = require('child_process').spawn,
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', config.server.runuser, '/RP', config.server.runpass, '/DU', dur]);
-	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', 'reflex', '/RP', 'reflex', '/DU', dur]);
 	
-	res.send({mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
+	res.send({success: 1, mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
 	
 	currentServers++;
 	
