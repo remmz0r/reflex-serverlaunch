@@ -5,18 +5,45 @@
 			"config": "base",
 			"maxServers": 3,
 			"minPort": 32100,
-			"hostname": "game.reflexfps.net.au"
+			"hostname": "game.reflexfps.net.au",
+			"runuser": "flipped\\reflex",
+			"rumpass": "mattz0r!"
 		},
 		
 	"gametype":
+	
 		{ 
+		
 			"tdm": 
-			{
-				"duration": {"hours": 1,  "minutes": 11},
-				"maxClients": 8,
+			
+				{
+				"duration": {"hours": 2,  "minutes": 00},
+				"maxClients": 10,
 				"timeLimit": 20
-			}
+				},
+				
+			"2v2":
+				{	"duration": {"hours": 2, "minutes", 00},
+					"maxClients": 6,
+					"timeLimit": 15
+				}
+				
+			"atdm":
+				{	"duration": {"hours": 2, "minutes", 00};
+					"maxClients": 10,
+					"timeLimit" 20
+				}
+				
+			"affa":
+				{	"duration": {"hours": 1, "minutes", 00};
+					"maxClients": 10,
+					"timeLimit": 20
+				}
+				
 		}
+		
+	}
+	
 }
 	
 		

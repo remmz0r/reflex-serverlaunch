@@ -51,7 +51,13 @@ app.get('/launch/pug/:mode', function(req, res) {
 	
 	} else {
 	
-	var mode = req.params.mode;
+	switch(req.params.mode) {
+		
+		case "tdm":
+		case "2v2": mode = "tdm"; break;
+		
+	}
+	
 	var port = ports[currentServers];
 	var steam = port + 20;
 	var map = "thct7";
@@ -93,11 +99,8 @@ app.get('/launch/pug/:mode', function(req, res) {
 	console.log(startTime);
 	
     var spawn = require('child_process').spawn,
-<<<<<<< HEAD
-	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', 'flipped\\reflex', '/RP', 'mattz0r!', '/DU', dur]);
-=======
+	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', config.server.runuser, '/RP', config.server.runpass, '/DU', dur]);
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', 'reflex', '/RP', 'reflex', '/DU', dur]);
->>>>>>> dff3f6affa6e6cf161ed95e67a14af1be4f38e49
 	
 	res.send({mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
 	
@@ -141,5 +144,5 @@ app.get('/launch/pug/:mode', function(req, res) {
 	}
 	
 });
-app.listen(3000, "172.18.87.15");
+app.listen(3000);
 console.log('Listening on port 3000...');
