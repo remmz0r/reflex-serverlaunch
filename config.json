@@ -7,7 +7,7 @@
 			"minPort": 32100,
 			"hostname": "game.reflexfps.net.au",
 			"runuser": "flipped\\reflex",
-			"rumpass": "mattz0r!"
+			"runpass": "mattz0r!"
 		},
 		
 	"gametype":
