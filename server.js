@@ -53,6 +53,22 @@ app.get('/launch/pug/:mode', function(req, res) {
 	var h = fnc.addZero(d.getHours());
 	var m = fnc.addZero(d.getMinutes());
 	
+	if (m == "60") {
+		
+		if (parseInt(h) < 23) {
+			
+			h += 1;
+			m = fnc.addZero(0);
+			
+		} else {
+			
+			h = fnc.addZero(0);
+			m = fnc.addZero(0);
+			
+		}
+		
+	} 
+	
 	var maxClients = 0;
 	
 	switch(mode) {
@@ -98,16 +114,11 @@ app.get('/launch/pug/:mode', function(req, res) {
 	
 	var dur = fnc.addZero(parseInt(hours)) + ":" + fnc.addZero(parseInt(mins));
 	
-	console.log(typeof dur);
-	console.log(dur);
-	
 	var taskName = mode + "#" + (currentServers + 1).toString();
 	
 	var serverString =  config.server.path + ' +loadconfig ' + config.server.config + ' +sv_startmode ' + mode + ' +sv_gameport ' + ports[currentServers] + ' +sv_steamport ' + steam + ' +sv_startmap ' + map + ' +sv_maxclients ' + maxClients;
 	
 	var startTime = h + ":" + fnc.addZero(parseInt(m) + 1);
-	
-	console.log(startTime);
 	
     var spawn = require('child_process').spawn,
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', config.server.runuser, '/RP', config.server.runpass, '/DU', dur]);
