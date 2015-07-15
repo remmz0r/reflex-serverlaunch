@@ -1,28 +1,7 @@
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-function makePorts(config) {
-	
-	var portRange = [];
-	
-	for (i = 0; i < config.server.maxServers; i++) {
-		
-		portRange[i] = config.server.minPort + i;
-		
-	}
-	
-	return portRange;
-	
-	
-}
-
+var fnc = require('./functions.js');
 var config = require('./config.json');
 
-var ports = makePorts(config);
+var ports = fnc.makePorts(config);
 
 var maxServers = config.server.maxServers;
 
@@ -71,8 +50,8 @@ app.get('/launch/pug/:mode', function(req, res) {
 	var map = "thct7";
 	var d = new Date();
 	var v  = new Date();
-	var h = addZero(d.getHours());
-	var m = addZero(d.getMinutes());
+	var h = fnc.addZero(d.getHours());
+	var m = fnc.addZero(d.getMinutes());
 	
 	var maxClients = 0;
 	
@@ -117,7 +96,7 @@ app.get('/launch/pug/:mode', function(req, res) {
 		
 	}
 	
-	var dur = addZero(parseInt(hours)) + ":" + addZero(parseInt(mins));
+	var dur = fnc.addZero(parseInt(hours)) + ":" + fnc.addZero(parseInt(mins));
 	
 	console.log(typeof dur);
 	console.log(dur);
@@ -126,7 +105,7 @@ app.get('/launch/pug/:mode', function(req, res) {
 	
 	var serverString =  config.server.path + ' +loadconfig ' + config.server.config + ' +sv_startmode ' + mode + ' +sv_gameport ' + ports[currentServers] + ' +sv_steamport ' + steam + ' +sv_startmap ' + map + ' +sv_maxclients ' + maxClients;
 	
-	var startTime = h + ":" + addZero(parseInt(m) + 1);
+	var startTime = h + ":" + fnc.addZero(parseInt(m) + 1);
 	
 	console.log(startTime);
 	

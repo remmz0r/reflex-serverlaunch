@@ -1,11 +1,11 @@
-function addZero(i) {
+exports.addZero = function (i) {
     if (i < 10) {
         i = "0" + i;
     }
     return i;
 }
 
-function makePorts(config) {
+exports.makePorts = function (config) {
 	
 	var portRange = [];
 	
