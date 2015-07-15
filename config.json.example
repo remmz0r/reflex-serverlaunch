@@ -6,8 +6,8 @@
 			"maxServers": 5,
 			"minPort": 32100,
 			"hostname": "game.reflexfps.net.au",
-			"runuser": "flipped\\reflex",
-			"runpass": "mattz0r!"
+			"runuser": "runuser",
+			"runpass": "runpass"
 		},
 		
 	"gametype":
