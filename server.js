@@ -112,11 +112,13 @@ app.get('/launch/pug/:mode', function(req, res) {
 		
 	}
 	
+	timeLimit = timeLimit * 60;
+	
 	var dur = fnc.addZero(parseInt(hours)) + ":" + fnc.addZero(parseInt(mins));
 	
 	var taskName = mode + "#" + (currentServers + 1).toString();
 	
-	var serverString =  config.server.path + ' +loadconfig ' + config.server.config + ' +sv_startmode ' + mode + ' +sv_gameport ' + ports[currentServers] + ' +sv_steamport ' + steam + ' +sv_startmap ' + map + ' +sv_maxclients ' + maxClients;
+	var serverString =  config.server.path + ' +loadconfig ' + config.server.config + ' +sv_startmode ' + mode + ' +sv_gameport ' + ports[currentServers] + ' +sv_steamport ' + steam + ' +sv_startmap ' + map + ' +sv_maxclients ' + maxClients + ' +sv_timelimit ' + timeLimit;
 	
 	var startTime = h + ":" + fnc.addZero(parseInt(m) + 1);
 	
