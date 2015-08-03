@@ -45,7 +45,22 @@ app.get('/launch/pug/:mode', function(req, res) {
 		
 	}
 	
-	var port = ports[currentServers];
+	var port = 0;
+	var portnum = 0;
+	
+	for (i = 0; i < maxServers; i++) {
+		if (ports[i][1] == 0) {
+			port = ports[i][0];
+			ports[i][1] = 1;
+			portnum = i;
+			break;
+		}
+	}
+	
+	if (port = 0) {
+		res.send({success: 0, error: "Port allocation error"})
+	}
+	
 	var steam = port + 20;
 	var map = "thct7";
 	var d = new Date();
@@ -143,6 +158,7 @@ app.get('/launch/pug/:mode', function(req, res) {
 
 			currentServers--;
 			console.log(currentServers);
+			ports[portnum][1] = 0;
 			
 	}, interval);
 	
