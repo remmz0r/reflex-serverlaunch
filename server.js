@@ -140,7 +140,7 @@ app.get('/launch/pug/:mode', function(req, res) {
     var spawn = require('child_process').spawn,
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', config.server.runuser, '/RP', config.server.runpass, '/DU', dur]);
 	
-	res.send({success: 1, mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
+	res.send({success: 1, mode: mode, host: config.server.hostname, port: ports[portnum][0], password: "undefined"})
 	
 	currentServers++;
 	
