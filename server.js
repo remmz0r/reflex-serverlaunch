@@ -45,7 +45,22 @@ app.get('/launch/pug/:mode', function(req, res) {
 		
 	}
 	
-	var port = ports[currentServers];
+	var port = 0;
+	var portnum = 0;
+	
+	for (i = 0; i < maxServers; i++) {
+		if (ports[i][1] == 0) {
+			port = ports[i][0];
+			ports[i][1] = 1;
+			portnum = i;
+			break;
+		}
+	}
+	
+	if (port = 0) {
+		res.send({success: 0, error: "Port allocation error"})
+	}
+	
 	var steam = port + 20;
 	var map = "thct7";
 	var d = new Date();
@@ -125,7 +140,7 @@ app.get('/launch/pug/:mode', function(req, res) {
     var spawn = require('child_process').spawn,
 	ls           = spawn('schtasks', ['/Create', '/TR', serverString, '/V1', '/SC', 'ONCE', '/TN', taskName, '/ST', startTime, '/F', '/K', '/Z', '/RU', config.server.runuser, '/RP', config.server.runpass, '/DU', dur]);
 	
-	res.send({success: 1, mode: mode, host: config.server.hostname, port: ports[currentServers], password: "undefined"})
+	res.send({success: 1, mode: mode, host: config.server.hostname, port: ports[portnum][0], password: "undefined"})
 	
 	currentServers++;
 	
@@ -143,6 +158,7 @@ app.get('/launch/pug/:mode', function(req, res) {
 
 			currentServers--;
 			console.log(currentServers);
+			ports[portnum][1] = 0;
 			
 	}, interval);
 	

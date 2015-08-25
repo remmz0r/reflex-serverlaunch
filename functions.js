@@ -11,7 +11,7 @@ exports.makePorts = function (config) {
 	
 	for (i = 0; i < config.server.maxServers; i++) {
 		
-		portRange[i] = config.server.minPort + i;
+		portRange[i] = [config.server.minPort + i,0];
 		
 	}
 	
